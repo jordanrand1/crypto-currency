@@ -1,14 +1,14 @@
 class Api::CoinsController < ApplicationController
   before_action :set_coin, only: [:show, :update, :destroy]
   BASE_URL = 'https://api.coinmarketcap.com/v2/'
-  
+
   def index
     render json: current_user.coins
   end
 
   # POST /api/coins ?coin=btc
   def create
-    cmc_id = params[:coins].capitalize
+    cmc_id = params[:coin].upcase  
     listings = HTTParty.get("#{BASE_URL}listings")
     listing = listings['data'].find { |l| l['symbol'] == cmc_id }
     res = HTTParty.get("#{BASE_URL}/ticker/#{listing['id']}")
@@ -25,7 +25,8 @@ class Api::CoinsController < ApplicationController
     render json: @coin
   end
 
-  #stop watching a coin
+  # PUT /api/coins/:id
+  # Stop watching a coin
   def update
     current_user.watched_coins.find_by(coin_id: @coin.id).destroy
   end
@@ -39,4 +40,9 @@ class Api::CoinsController < ApplicationController
       @coin = Coin.find(params[:id])
     end
 
+
 end
+
+
+
+

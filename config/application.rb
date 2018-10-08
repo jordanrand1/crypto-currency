@@ -29,5 +29,6 @@ module CryptoPortfolio
           expose: ['access-token', 'client', 'uid', 'expiry']
       end
     end
+
   end
 end

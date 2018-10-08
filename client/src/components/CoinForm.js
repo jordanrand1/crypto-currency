@@ -1,7 +1,7 @@
-import React from 'react';
-import { Form } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { addCoin } from '../reducers/coins';
+import React from 'react'
+import { Form } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { addCoin } from '../reducers/coins'
 
 class CoinForm extends React.Component {
   state = { coin: '' }
@@ -13,11 +13,12 @@ class CoinForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { dispatch } = this.props
+    const { dispatch, resetForm } = this.props
     const { coin } = this.state
     dispatch(addCoin(coin))
-    this.setState({ coin: '' })
+    resetForm()
   }
+
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -28,10 +29,11 @@ class CoinForm extends React.Component {
           name="coin"
           required
         />
-        <Form.Button onClick={this.handleSubmit}>Add Coin</Form.Button>
+        <Form.Button>Add Coin</Form.Button>
       </Form>
     )
   }
 }
 
 export default connect()(CoinForm)
+

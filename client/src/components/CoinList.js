@@ -1,7 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-const CoinList = () => {
-
-}
+const CoinList = () => null
 
 export default CoinList
+
