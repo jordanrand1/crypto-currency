@@ -9,6 +9,5 @@ class User < ActiveRecord::Base
 
   has_many :watched_coins, dependent: :destroy
   has_many :coins, dependent: :destroy
-    
-  end
+  
 end
